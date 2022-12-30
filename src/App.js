@@ -9,7 +9,7 @@ import AccountButton from "./components/AccountButton";
 import ChatUI from "./components/ChatUI";
 
 import {db} from "./firebase";
-import { addDoc, collection, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
 
 
 const emptyUser = undefined;
@@ -46,8 +46,8 @@ function App() {
     <div className="App">
 
       {
-        (user === undefined) 
-        && <Login logIn = {logIn} user={user}/>
+        ((user === undefined) 
+        && <Login logIn = {logIn} user={user}/>)
         || <AccountButton logOut = {logOut} user = {user} />
       }
 
