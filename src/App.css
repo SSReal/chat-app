@@ -4,6 +4,7 @@
     border-radius: 10px;
     border: 1px solid black;
     color: white;
+    min-height: 20px;
 }
 
 .sent-message {
@@ -18,11 +19,16 @@
     align-self: flex-start;
 }
 
+.chat-ui {
+    max-height: 700px;
+}
+
 .chats {
     background-color: #dcdcdc;
     align-self: center;
     max-width: 450px;
+    height: 600px;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }

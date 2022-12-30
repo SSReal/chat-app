@@ -22,7 +22,8 @@ function App() {
     const cred = await signInWithPopup(auth, googleAuthProvider)
                         .catch((err) => console.log(err));
     console.log(cred);
-    const q = await getDoc(doc(usersRef, cred.user.uid));
+    const q = (await getDoc(doc(usersRef, cred.user.uid))).data();
+    // const res = q.map((d)=>d.data());
     console.log(q);
     if(q === undefined) {
       await setDoc(doc(usersRef, cred.user.uid), {

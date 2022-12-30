@@ -8,7 +8,7 @@ function ChatUI(props) {
 
     const [chats, setChats] = useState([]);
     const [userDict, setUserDict] = useState({[props.user.uid]: props.user});
-    console.log(userDict);
+    // console.log(userDict);
 
     function renderChat(chat) {
         if(chat.type === "text") {
