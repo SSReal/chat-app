@@ -1,7 +1,7 @@
 import {db} from "../firebase";
 import _ from "lodash";
 
-import {addDoc, collection, doc, getDoc, getDocs, onSnapshot, orderBy, query, where} from "firebase/firestore";
+import {addDoc, collection, doc, getDoc, onSnapshot, orderBy, query} from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 
 function ChatUI(props) {
@@ -50,28 +50,6 @@ function ChatUI(props) {
         )
         return unsub;
     }, [])
-    // useEffect(() =>{
-    //     async function getChats() {
-            
-            
-    //         const chatDocs = (await getDocs(query(chatRef, orderBy('timestamp', 'asc')))).docs;
-    //         const allChats = chatDocs.map((docSnapshot) => docSnapshot.data());
-    //         console.log(allChats);
-    //         const users = {};
-    //         for(const chat of allChats) {
-    //             if(!users[chat.sender]) {
-    //                 console.log(chat.sender);
-    //                 const userDoc = (await getDoc(doc(userRef, chat.sender))).data();
-    //                 console.log(userDoc);
-    //                 users[chat.sender] = userDoc;
-    //             }
-    //         }
-    //         console.log(users);
-    //         setUserDict(users);
-    //         setChats(allChats);
-    //     };
-    //     getChats();
-    // }, [])
 
     useEffect(() => {
         console.log("run");
