@@ -1,3 +1,31 @@
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
+
+#root {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: #202124;
+    color:aliceblue;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 600,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+
+@font-face {
+  font-family: NotoSans;
+  src: url("..\\fonts\\Noto Sans\\NotoSans-Regular.ttf")
+}

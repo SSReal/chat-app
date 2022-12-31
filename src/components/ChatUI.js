@@ -83,9 +83,10 @@ function ChatUI(props) {
                 }
                 <div ref = {chatBottomRef} />
             </div>
-            
-            <input placeholder = "Type a message" text = {chatText} onChange = {changeText}/>
-            <button onClick = {sendMessage}>Send</button>
+            <div className = "edit-message">
+                <input className = "message-text" placeholder = "Type a message" text = {chatText} onChange = {changeText}/>
+                <button className = "send-button" onClick = {sendMessage}><span className="material-symbols-outlined">send</span></button>
+            </div>
         </div>
     )
 }
