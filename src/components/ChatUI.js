@@ -4,6 +4,8 @@ import _ from "lodash";
 import {addDoc, collection, doc, getDoc, onSnapshot, orderBy, query} from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 
+import Message from "./Message";
+
 function ChatUI(props) {
 
     const chatBottomRef = useRef(null);
@@ -16,10 +18,10 @@ function ChatUI(props) {
         if(chat.type === "text") {
 
             if(chat.sender === props.user.uid) {
-                return <div className = "message sent-message"><b>Me: </b>{chat.content}</div>
+                return <Message sent content={chat.content} contentType={chat.type} />
             }
             else {
-                return <div className = "message received-message"><b>{userDict[chat.sender].displayName + ": "}</b>{chat.content}</div>
+                return <Message displayName = {userDict[chat.sender].displayName} content = {chat.content} contentType={chat.type} />
             }
         }
     }
