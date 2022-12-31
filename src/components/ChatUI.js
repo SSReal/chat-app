@@ -26,8 +26,6 @@ function ChatUI(props) {
         }
     }
     
-    
-
     useEffect(() => {
         const chatRef = collection(db, 'chats');
         const userRef = collection(db, 'users');
@@ -51,6 +49,14 @@ function ChatUI(props) {
             }
         )
         return unsub;
+    }, [])
+
+    useEffect(() => {
+        setTimeout(() => {
+            console.log("run");
+            console.log(chatBottomRef.current);
+            chatBottomRef.current?.scrollIntoView({behavior: "smooth"});
+        }, 1000)
     }, [])
 
     useEffect(() => {
