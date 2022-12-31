@@ -76,6 +76,7 @@ function ChatUI(props) {
         const newRef = await addDoc(chatRef, newMsg);
         console.log("successfully added as: " + newRef.id)
         setChats(_.concat(chats, newMsg));
+        setChatText("");
     }
     return (
         <div className = "chat-ui">
@@ -86,7 +87,7 @@ function ChatUI(props) {
                 <div ref = {chatBottomRef} />
             </div>
             <div className = "edit-message">
-                <input className = "message-text" placeholder = "Type a message" text = {chatText} onChange = {changeText}/>
+                <input type = "text" className = "message-text" placeholder = "Type a message" value = {chatText} onChange = {changeText}/>
                 <button className = "send-button" onClick = {sendMessage}><span className="material-symbols-outlined">send</span></button>
             </div>
         </div>
