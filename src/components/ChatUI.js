@@ -5,11 +5,12 @@ import {addDoc, collection, doc, getDoc, onSnapshot, orderBy, query} from "fireb
 import { useEffect, useRef, useState } from "react";
 
 import Message from "./Message";
+import MessageBox from "./MessageBox";
 
 function ChatUI(props) {
 
     const chatBottomRef = useRef(null);
-    const inputRef = useRef(null);
+    // const inputRef = useRef(null);
 
     const [chats, setChats] = useState([]);
     const [userDict, setUserDict] = useState({[props.user.uid]: props.user});
@@ -52,7 +53,7 @@ function ChatUI(props) {
             }
         )
         setLoading(false);
-        inputRef.current?.focus();
+        // inputRef.current?.focus();
         return unsub;
     }, [])
 
@@ -110,7 +111,8 @@ function ChatUI(props) {
                 <div ref = {chatBottomRef} />
             </div>
             <div className = "edit-message">
-                <input ref = {inputRef} type = "text" className = "message-text" placeholder = "Type a message" value = {chatText} onChange = {changeText} onKeyUp={handleKeyUp}/>
+                <MessageBox value = {chatText} onChange = {changeText} onKeyUp={handleKeyUp} />
+                {/* <input autofocus type = "text" className = "message-text" placeholder = "Type a message" value = {chatText} onChange = {changeText} onKeyUp={handleKeyUp}/> */}
                 <button className = "send-button" onClick = {sendMessage}><span className="material-symbols-outlined">send</span></button>
             </div>
         </div>
