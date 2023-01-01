@@ -9,6 +9,7 @@ import Message from "./Message";
 function ChatUI(props) {
 
     const chatBottomRef = useRef(null);
+    const inputRef = useRef(null);
 
     const [chats, setChats] = useState([]);
     const [userDict, setUserDict] = useState({[props.user.uid]: props.user});
@@ -51,6 +52,7 @@ function ChatUI(props) {
             }
         )
         setLoading(false);
+        inputRef.current?.focus();
         return unsub;
     }, [])
 
@@ -108,7 +110,7 @@ function ChatUI(props) {
                 <div ref = {chatBottomRef} />
             </div>
             <div className = "edit-message">
-                <input type = "text" className = "message-text" placeholder = "Type a message" value = {chatText} onChange = {changeText} onKeyUp={handleKeyUp}/>
+                <input ref = {inputRef} type = "text" className = "message-text" placeholder = "Type a message" value = {chatText} onChange = {changeText} onKeyUp={handleKeyUp}/>
                 <button className = "send-button" onClick = {sendMessage}><span className="material-symbols-outlined">send</span></button>
             </div>
         </div>
