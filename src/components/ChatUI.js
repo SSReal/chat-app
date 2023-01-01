@@ -1,5 +1,5 @@
 import {db} from "../firebase";
-import _ from "lodash";
+// import _ from "lodash";
 
 import {addDoc, collection, doc, getDoc, onSnapshot, orderBy, query} from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
@@ -12,6 +12,8 @@ function ChatUI(props) {
 
     const [chats, setChats] = useState([]);
     const [userDict, setUserDict] = useState({[props.user.uid]: props.user});
+
+    const [isLoading, setLoading] = useState(true);
     // console.log(userDict);
 
     function renderChat(chat) {
@@ -48,16 +50,17 @@ function ChatUI(props) {
                 setChats(allChats);
             }
         )
+        setLoading(false);
         return unsub;
     }, [])
 
-    useEffect(() => {
-        setTimeout(() => {
-            console.log("run");
-            console.log(chatBottomRef.current);
-            chatBottomRef.current?.scrollIntoView({behavior: "smooth"});
-        }, 1000)
-    }, [])
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         console.log("run");
+    //         console.log(chatBottomRef.current);
+    //         chatBottomRef.current?.scrollIntoView({behavior: "smooth"});
+    //     }, 1000)
+    // }, [])
 
     useEffect(() => {
         console.log("run");
@@ -68,6 +71,13 @@ function ChatUI(props) {
     const [chatText, setChatText] = useState("");
     function changeText(e) {
         setChatText(e.target.value);
+    }
+
+    function handleKeyUp(e) {
+        if(e.key === "Enter") {
+            console.log("enter pressed");
+            sendMessage();
+        }
     }
 
     async function sendMessage() {
@@ -85,19 +95,20 @@ function ChatUI(props) {
         const chatRef = collection(db, 'chats');
         const newRef = await addDoc(chatRef, newMsg);
         console.log("successfully added as: " + newRef.id)
-        setChats(_.concat(chats, newMsg));
+        // setChats(_.concat(chats, newMsg)); //TODO: fix sequence problem with some messages
         setChatText("");
     }
     return (
         <div className = "chat-ui">
             <div className = "chats">
                 {
+                    (isLoading && <img alt = "loading" className = "loading-image" src = "img/loader.gif" />) ||
                     chats.map((chat) => renderChat(chat))
                 }
                 <div ref = {chatBottomRef} />
             </div>
             <div className = "edit-message">
-                <input type = "text" className = "message-text" placeholder = "Type a message" value = {chatText} onChange = {changeText}/>
+                <input type = "text" className = "message-text" placeholder = "Type a message" value = {chatText} onChange = {changeText} onKeyUp={handleKeyUp}/>
                 <button className = "send-button" onClick = {sendMessage}><span className="material-symbols-outlined">send</span></button>
             </div>
         </div>

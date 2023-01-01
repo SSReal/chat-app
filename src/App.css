@@ -135,3 +135,9 @@
     scale: 1.25;
     cursor: pointer;
 }
+
+.loading-image {
+    align-self: center;
+    height: 100px;
+    justify-self: center;
+}
