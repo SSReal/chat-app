@@ -71,6 +71,10 @@ function ChatUI(props) {
     }
 
     async function sendMessage() {
+        if(chatText === "") {
+            alert("Message can't be empty!");
+            return;
+        }
         const newMsg = {
             content: chatText,
             type: "text", 
