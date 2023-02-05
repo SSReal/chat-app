@@ -84,21 +84,23 @@ function ChatUI(props) {
     }
 
     async function sendMessage() {
-        if(chatText === "") {
-            alert("Message can't be empty!");
-            return;
-        }
-        const newMsg = {
-            content: chatText,
-            type: "text", 
-            sender: props.user.uid,
-            receiver: "sajal", //for testing
-            timestamp: new Date(),
-        }
-        const chatRef = collection(db, 'chats');
-        const newRef = await addDoc(chatRef, newMsg);
-        console.log("successfully added as: " + newRef.id)
-        // setChats(_.concat(chats, newMsg)); //TODO: fix sequence problem with some messages
+        //disable sending message
+        alert("Sending message is now disabled as this project is no longer actively maintained.");
+        // if(chatText === "") {
+        //     alert("Message can't be empty!");
+        //     return;
+        // }
+        // const newMsg = {
+        //     content: chatText,
+        //     type: "text", 
+        //     sender: props.user.uid,
+        //     receiver: "sajal", //for testing
+        //     timestamp: new Date(),
+        // }
+        // const chatRef = collection(db, 'chats');
+        // const newRef = await addDoc(chatRef, newMsg);
+        // console.log("successfully added as: " + newRef.id)
+        // // setChats(_.concat(chats, newMsg)); //TODO: fix sequence problem with some messages
         setChatText("");
     }
     return (
