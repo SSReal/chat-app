@@ -21,10 +21,10 @@ function App() {
     const usersRef = collection(db, 'users');
     const cred = await signInWithPopup(auth, googleAuthProvider)
                         .catch((err) => console.log(err));
-    console.log(cred);
+    // console.log(cred);
     const q = (await getDoc(doc(usersRef, cred.user.uid))).data();
     // const res = q.map((d)=>d.data());
-    console.log(q);
+    // console.log(q);
     if(q === undefined) {
       await setDoc(doc(usersRef, cred.user.uid), {
         displayName: cred.user.displayName,
@@ -38,7 +38,7 @@ function App() {
     auth.signOut()
     .then(() => {
         setUser(undefined);
-        console.log("logged out successfully");
+        // console.log("logged out successfully");
     })
 }
 

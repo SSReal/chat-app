@@ -1,7 +1,7 @@
 import {db} from "../firebase";
 // import _ from "lodash";
 
-import {addDoc, collection, doc, getDoc, onSnapshot, orderBy, query} from "firebase/firestore";
+import {collection, doc, getDoc, onSnapshot, orderBy, query} from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 
 import Message from "./Message";
@@ -16,7 +16,7 @@ function ChatUI(props) {
     const [userDict, setUserDict] = useState({[props.user.uid]: props.user});
 
     const [isLoading, setLoading] = useState(true);
-    // console.log(userDict);
+    // // console.log(userDict);
 
     function renderChat(chat) {
         if(chat.type === "text") {
@@ -37,17 +37,17 @@ function ChatUI(props) {
             async (querySnapshot) => {
                 const chatDocs = querySnapshot.docs;
                 const allChats = chatDocs.map((d)=>d.data());
-                console.log(allChats);
+                // console.log(allChats);
                 const users = {};
                 for(const chat of allChats) {
                     if(!users[chat.sender]) {
-                        console.log(chat.sender);
+                        // console.log(chat.sender);
                         const userDoc = (await getDoc(doc(userRef, chat.sender))).data();
-                        console.log(userDoc);
+                        // console.log(userDoc);
                         users[chat.sender] = userDoc;
                     }
                 }
-                console.log(users);
+                // console.log(users);
                 setUserDict(users);
                 setChats(allChats);
             }
@@ -59,15 +59,15 @@ function ChatUI(props) {
 
     // useEffect(() => {
     //     setTimeout(() => {
-    //         console.log("run");
-    //         console.log(chatBottomRef.current);
+    //         // console.log("run");
+    //         // console.log(chatBottomRef.current);
     //         chatBottomRef.current?.scrollIntoView({behavior: "smooth"});
     //     }, 1000)
     // }, [])
 
     useEffect(() => {
-        console.log("run");
-        console.log(chatBottomRef.current);
+        // console.log("run");
+        // console.log(chatBottomRef.current);
         chatBottomRef.current?.scrollIntoView({behavior: "smooth"});
     }, [chats]);
 
@@ -78,7 +78,7 @@ function ChatUI(props) {
 
     function handleKeyUp(e) {
         if(e.key === "Enter") {
-            console.log("enter pressed");
+            // console.log("enter pressed");
             sendMessage();
         }
     }
@@ -99,7 +99,7 @@ function ChatUI(props) {
         // }
         // const chatRef = collection(db, 'chats');
         // const newRef = await addDoc(chatRef, newMsg);
-        // console.log("successfully added as: " + newRef.id)
+        // // console.log("successfully added as: " + newRef.id)
         // // setChats(_.concat(chats, newMsg)); //TODO: fix sequence problem with some messages
         setChatText("");
     }
